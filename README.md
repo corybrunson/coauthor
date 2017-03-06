@@ -1,4 +1,4 @@
-# coauthorship
+# coauthor
 
 This repo contains code to reproduce an analysis of coauthorship trends in biomedical research.
 

@@ -3,11 +3,12 @@
 
 ## Preparation
 
+setwd("PubMed/proj/coauthor")
 # Check current directiory
 if (!grepl("/coauthor$", getwd())) stop("Go to 'coauthor' directory")
 # Check data files
 stopifnot(file.exists(paste0("calc/",
-                             c("pmDat", "wosDat", "sjrDat"),
+                             c("pmDat", "wosDat", "sjrDat", "jids"),
                              ".RData")))
 
 # Create directories for figures and tables
@@ -21,7 +22,10 @@ for(d in dirs) if (!file.exists(d)) dir.create(d)
 #source("scr/clean.r")
 
 # Download and clean data from Web of Science and SCImago
-source("scr/metrics.r")
+#source("scr/metrics.r")
+
+# Read the file "J_Entrez" as a data.table
+#source("scr/jid.r")
 
 # Merge the PubMed data with the Web of Science and SCImago data
 source("scr/merge.r")
@@ -32,34 +36,50 @@ source("scr/subset.r")
 # Construct co-occurrence matrices for MeSH terms (not used)
 #source("scr/cooccurence.r")
 
-source("scr/transform.R")
+# Transform regressors in order to linearize relationships with author count
+source("scr/transform.r")
 
-source("scr/summary.R")
+# Summary statistics, tables, and figures
+source("scr/summary.r")
 
-source("scr/baselines.R")
+# Transform regressors in order to linearize relationships with author count
+source("scr/baselines.r")
 
-source("scr/select.R")
+# Model goodness-of-fit comparisons (comparison to lognormal is inappropriate)
+source("scr/goodness.r")
 
-source("scr/univariate.R")
+# Multiple NB regression with time interactions and journal random effects
+source("scr/fit.r")
 
-source("scr/lasso.R")
+# Residuals analysis
+source("scr/resid.r")
 
-source("scr/multivariate.R")
+# Effect estimates
+source("scr/effects.r")
 
-source("scr/multislope.R")
+# Assessment of predictive power of fitted models
+source("scr/predict.r")
 
-source("scr/interact.R")
+# Variable comparison using AIC (DEFAULT OPTIONS ONLY)
+source("scr/importance.r")
 
-source("scr/results.R")
+# Re-fit models for each choice of variable measure
+# (NOT TESTED WITH incl_indicator == TRUE)
+source("scr/sensitivity.r")
 
-source("scr/importance.R")
+# Subject classification-specific regression analyses
+# (NOT TESTED WITH incl_indicator == TRUE)
+source("scr/classifications.r")
 
-source("scr/shrinkage.R")
+# Subject summary and models with subject indicator variables (INTRACTABLE)
+#source("scr/subjects.r")
 
-source("scr/predict.R")
+# Fit and review lognormal models
+source("scr/fit-lognormal.r")
+source("scr/effects-lognormal.r")
 
-source("scr/sensitivity.R")
+# Generate elegant plots
+source("scr/plots.r")
 
-source("scr/subjects.R")
-
-source("scr/plots.R")
+# Generate tables
+source("scr/tables.r")

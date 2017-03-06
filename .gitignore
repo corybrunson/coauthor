@@ -28,8 +28,18 @@ vignettes/*.pdf
 
 # Cory additions #
 
+*.sh
+
 # All data files and directories
 *.RData
 calc/*
 data/*
+
+# Manuscript elements
+fig/*
+tab/*
+doc/*
+
+# Old scripts
+*-old
 
